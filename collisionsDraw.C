@@ -164,6 +164,4 @@ void collisionsDraw (int nucleons = 208, int sim = 20, const string& location = 
         
     }
 
- //std::cout << xPos[1];
-
 }

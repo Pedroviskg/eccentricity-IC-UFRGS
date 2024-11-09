@@ -101,7 +101,8 @@ void eccen()
 		std::cout << "Erp: " << e_rp[k] << " Epp: "<< e_pp[k] << std::endl;
 	}
 	
-	// Overlap area -> Reaction plane
+	// Overlap area -> Reaction plane (s_rp) and participant plane(s_pp)
+
 	std::vector<Double_t> s_rp;
 	std::vector<Double_t> s_pp;
 	
@@ -115,7 +116,7 @@ void eccen()
 	}
 		
 	
-	
+	// Draw a histogram to see the distribuition of the data
 	TH1F* histogram = new TH1F("h1", "histograma", 50, 0, 1);
 	TCanvas* canvas = new TCanvas();
 	for(int i = 0; i < s_size; i++)

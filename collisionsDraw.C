@@ -136,14 +136,18 @@ void collisionsDraw (int nucleons = 208, int sim = 20, const string& location = 
         config(secondPart, kRed, "nbp");
 	
 	  // Create two vectors that will be used to store data at xPos and yPos
-	  vector<Double_t> in_x;
+	  vector<Double_t> 
+		in_x,
+		in_y;
 	  in_x.insert(in_x.end(), xfp, xfp + fSize);
 	  in_x.insert(in_x.end(), xsp, xsp + sSize);
-	  
-	  vector<Double_t> in_y;
 	  in_y.insert(in_y.end(), yfp, yfp + fSize);
 	  in_y.insert(in_y.end(), ysp, ysp + sSize);
-	  
+
+	  // Insert the vectors in another vector
+          xPos.push_back(in_x);
+          yPos.push_back(in_y);
+
         // Create legend
         auto leg = new TLegend(.1, .9, .4, .7);
         leg->SetHeader("Legenda", "c");
@@ -157,9 +161,7 @@ void collisionsDraw (int nucleons = 208, int sim = 20, const string& location = 
         string tName = location + "/Sim" + to_string(p) + ".png";
         canvas.SaveAs(tName.c_str());
         
-        // Insert the vectors in another vector
-        xPos.push_back(in_x);
-        yPos.push_back(in_y);
+        
     }
 
  //std::cout << xPos[1];

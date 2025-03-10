@@ -29,7 +29,7 @@ vec_1d get_sigma(vec_2d pos)
 }
 
 // Calculate covariance of x and y
-vec_1d get_covariance(vec_2d xpos, vec_2d ypos)
+vec_1d get_covarience(vec_2d xpos, vec_2d ypos)
 {
 	std::vector<Double_t> covariance;
 	for(int i = 0; i < xpos.size(); i++)
@@ -60,7 +60,7 @@ vec_1d get_covariance(vec_2d xpos, vec_2d ypos)
 }
 	
 		
-void eccen()
+void avgeccen()
 
 // Creating the vectors to store the geometric values
 {	
@@ -80,7 +80,7 @@ vec_1d b  = values_b();
 	{
 		vec_1d sqsigmax = get_sigma(xPosSim[iterations]);
 		vec_1d sqsigmay = get_sigma(yPosSim[iterations]);
-		vec_1d cov      = get_covariance(xPosSim[iterations], yPosSim[iterations]);
+		vec_1d cov      = get_covarience(xPosSim[iterations], yPosSim[iterations]);
 		
 		
 		int s_size = static_cast<int>(sqsigmax.size());
@@ -157,41 +157,20 @@ vec_1d b  = values_b();
 	// Recebe na cor    -> Frequência
 	
 	
-	TH2F* overlap = new TH2F("overlap", "Overlap area and participants histogram; eixox; eixoy",40, 0, 416, 180, 0, 40);
+	TH2F* part = new TH2F("part", "overlap; eixox; eixoy",50, 0, 408, 50, 0, 40);
 	
+	std::cout << v_par.size() << " e " << v_srp.size();
 	for(int s = 0; s < v_par.size(); s++)
 	{
 		for(int m = 0; m < v_par[s].size(); m++)
 		{
-			overlap->Fill(v_par[s][m], v_srp[s][m]);
+			std::cout << v_par[s][m];
+			part->Fill(v_par[s][m], v_srp[s][m]);
 		}
 	}
 	TCanvas* ctest = new TCanvas("ctest", "overlap", 800, 600);
-	gStyle->SetPalette(kViridis);
-        overlap->SetMinimum(0); 
-        overlap->SetMaximum(overlap->GetMaximum());
-        gPad->Update();
-	overlap->Draw("COLZ");
-	ctest->SaveAs("overlap.png");
-	
-	TH2F* epsilon_heat_map = new TH2F("epsilon_heat_map", "Eccentricity and participants histogram; eixox; eixoy", 50, 0, 416, 50, 0, 1);
-	
-	for(int s = 0; s < v_par.size(); s++)
-	{
-		for(int m = 0; m < v_par[s].size(); m++)
-		{
-			epsilon_heat_map->Fill(v_par[s][m], v_epp[s][m]);
-		}
-	}
-	
-	TCanvas* ctest2 = new TCanvas("ctest2", "epsilon_heat_map", 800, 600);
 	gStyle->SetPalette(kRainBow);
-	epsilon_heat_map->SetMinimum(0);
-	epsilon_heat_map->SetMaximum(epsilon_heat_map->GetMaximum());
-	gPad->Update();
-	epsilon_heat_map->Draw("COLZ");
-	ctest2->SaveAs("epsilonheatmap.png");
-	
+	part->Draw("COLZ");
 	
 	
 	

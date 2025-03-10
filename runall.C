@@ -1,7 +1,7 @@
-#include "collisionsDraw.C"
+#include "collider.C"
 #include "eccen.C"
 void runall()
 {
-	collisionsDraw();
+	collider();
 	eccen();
 }

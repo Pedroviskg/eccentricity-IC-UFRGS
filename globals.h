@@ -21,7 +21,7 @@ typedef std::vector<std::vector<Double_t>>              vec_2d;
 typedef std::vector<std::vector<std::vector<Double_t>>> vec_3d;
 
 // Necessary vectors. Stores the positions multiple simulations of the nucleons for each value of impact parameter
-vec_3d xPosSim, yPosSim;
+vec_3d xPosSim, yPosSim, collisions;
 vec_1d b;
 
 // Functions

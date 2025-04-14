@@ -8,25 +8,6 @@
 #include <TFile.h>
 #include <TTree.h>
 
-Double_t calcProb(Double_t *x, Double_t *par){
-    return (x[0] * x[0] * par[0]) / (1 + exp((x[0] - par[1])/par[2]));
-}
-
-std::vector<double> values_b()
-{
-    int divisions = 60;
-    double min = 0.0;
-    double max = 15.0;
-    double space = (max - min) / divisions;
-
-    std::vector<double> arr;
-
-    for (int i = 0; i <= divisions; i++) {
-        arr.push_back(min + i * space);
-    }
-
-    return arr;
-}
 // Constants
 const Double_t 
 	pi       	= TMath::Pi(),
@@ -37,6 +18,28 @@ const Double_t
  	radiusSq 	= sigma / pi, // fm^2
  	minDisSq 	= 0,          // fm^2
  	nucleons        = 208;
+	min             = 0
+	max             = 14
+
+Double_t calcProb(Double_t *x, Double_t *par){
+    return (x[0] * x[0] * par[0]) / (1 + exp((x[0] - par[1])/par[2]));
+}
+
+std::vector<double> values_b()
+{
+    int divisions = 60;
+    double min_b = min;
+    double max_b = max + 1;
+    double space = (max - min) / divisions;
+
+    std::vector<double> arr;
+
+    for (int i = 0; i <= divisions; i++) {
+        arr.push_back(min + i * space);
+    }
+
+    return arr;
+}
  
 
 void collider(int nucleons = 208, int sim = 1e4) {
